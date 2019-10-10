@@ -32,6 +32,7 @@ public class FortuneResource {
         fortuneContainer = ObjectIO.getFortuneContainer();
         String output = fortuneContainer.get();
         LOGGER.info("get fortune: " + output);
+        ObjectIO.WriteObjectToFile(fortuneContainer);
         return output;
     }
 

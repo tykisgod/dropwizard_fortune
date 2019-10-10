@@ -41,6 +41,7 @@ public class FortunesTestResource {
         int testTimes = times.orElse(100);
         String testOutput = fortuneContainer.frequencyTest(testTimes);
         LOGGER.info("test result " + testOutput);
+        ObjectIO.WriteObjectToFile(fortuneContainer);
         return testOutput;
     }
 

@@ -26,6 +26,17 @@ public class FortunesTestResource {
     @Path("/frequency")
     @GET
     public String testFortuneContainer(@QueryParam("times") Optional<Integer> times) {
+        /*
+         * HTTP GET
+         * invoke by:
+         * curl -XGET localhost:8080/test/frequency
+         *
+         * Simulate sending 'GET /fortune (com.example.helloworld.resources.FortuneResource)' {times} times.
+         * Default Simulation times is 100.
+         * 1. Show frequency of each fortune occurs;
+         * 2. Show all visible fortunes in fortune container object;
+         * 3. Show all fortunes in fortune container object.
+         * */
         fortuneContainer = ObjectIO.getFortuneContainer();
         int testTimes = times.orElse(100);
         String testOutput = fortuneContainer.frequencyTest(testTimes);
@@ -36,6 +47,13 @@ public class FortunesTestResource {
     @Path("/list")
     @GET
     public String showFortuneList(@QueryParam("type") Optional<Integer> type) {
+        /*
+         * HTTP GET
+         * invoke by:
+         * curl -XGET localhost:8080/test/list
+         *
+         * Show all/visible fortunes in fortune container object.
+         * */
         fortuneContainer = ObjectIO.getFortuneContainer();
         int showType = type.orElse(0);
         StringBuffer fortuneList = new StringBuffer();

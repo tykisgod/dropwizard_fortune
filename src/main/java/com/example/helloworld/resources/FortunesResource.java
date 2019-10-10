@@ -22,6 +22,14 @@ public class FortunesResource {
 
     @POST
     public int addFortune(@QueryParam("fortune") Optional<String> fortune) {
+        /*
+         * HTTP POST
+         * invoke by:
+         * curl -XPOST localhost:8080/fortunes?fortune={content of fortune}
+         *
+         * for example:
+         * curl -XPOST localhost:8080/fortunes?fortune="Hello World!"
+         * */
         fortuneContainer = ObjectIO.getFortuneContainer();
         if (fortune.isPresent()) {
             int newId = fortuneContainer.add(fortune.get());
@@ -37,6 +45,14 @@ public class FortunesResource {
     @Path("{fortuneId}")
     @DELETE
     public String deleteFortune(@PathParam("fortuneId") Optional<Integer> id) {
+        /*
+         * HTTP POST
+         * invoke by:
+         * curl -XDELETE localhost:8080/fortunes/{fortuneId}
+         *
+         * for example:
+         * curl -XDELETE localhost:8080/fortunes/1
+         * */
         fortuneContainer = ObjectIO.getFortuneContainer();
         if (id.isPresent()) {
             LOGGER.info(String.format("Try to delete fortune with id:= %s and with content: %s", id.get(), fortuneContainer.getFortuneById(id.get())));

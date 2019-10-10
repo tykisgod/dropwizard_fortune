@@ -22,6 +22,10 @@ public class ObjectIO {
     }
 
     public static FortuneContainer getFortuneContainer() {
+        /*
+        * If fortuneContainer object hasn't serialized to local disk, initialize it and serialize it;
+        * Otherwise, read it to a new fortuneContainer from disk.
+        * */
         FortuneContainer fortuneContainer = new FortuneContainer();
         try {
             System.out.println("Try Reading FortuneContainer!");

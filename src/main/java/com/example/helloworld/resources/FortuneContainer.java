@@ -16,10 +16,22 @@ public class FortuneContainer implements Serializable {
     }
 
     private boolean isFull() {
+        /*
+         * check if size of the visible part of fortuneList is equal to the actual size of the fortuneList
+         *
+         * By saying 'visible part', meaning the part of fortune that hasn't been deleted and thus
+         * can be returned by GET request.
+         *
+         * The 'invisible part' are the part of fortune has been deleted and cannot returned by GET request,
+         * but they may still exists in fortuneList, they are just invisible by users.
+         */
         return fortuneList.size() - rightmostIndex <= 1;
     }
 
     private void swapWithLastValue(int id) {
+        /*
+         * Swap the fortune with id {id} with the rightmost value of fortuneList.
+         * */
         String tempFortune = fortuneList.get(rightmostIndex);
         fortuneList.set(id, tempFortune);
     }
@@ -38,14 +50,17 @@ public class FortuneContainer implements Serializable {
     }
 
     public String getFortuneById(int id) {
-        if (isIdValid(id)){
+        if (isIdValid(id)) {
             return fortuneList.get(id);
-        }else{
+        } else {
             return "Can't get fortune with that id.";
         }
     }
 
     public String get() {
+        /*
+         * Randomly get a fortune form visible part of fortuneList.
+         * */
         if (rightmostIndex < 0) {
             return "Sorry, no fortune yet. Please come back later.";
         }
@@ -66,6 +81,9 @@ public class FortuneContainer implements Serializable {
     }
 
     public int add(String fortune_words) {
+        /*
+         * Add a new fortune into the visible part of fortuneList.
+         */
         if (isFull()) {
             fortuneList.add(fortune_words);
         } else {
@@ -78,6 +96,9 @@ public class FortuneContainer implements Serializable {
 
     @Override
     public String toString() {
+        /*
+         * Return a String represents the whole fortuneList, including visible and invisible parts
+         * */
         StringBuffer text = new StringBuffer();
         for (String vlaue : fortuneList) {
             text.append(vlaue + ", ");
@@ -86,6 +107,9 @@ public class FortuneContainer implements Serializable {
     }
 
     public String getVisFortuneList() {
+        /*
+         * Return a String represents the visible part of fortuneList
+         * */
         StringBuffer visFortuneListStr = new StringBuffer();
         for (int i = 0; i <= rightmostIndex; i++) {
             visFortuneListStr.append(fortuneList.get(i) + ",");
@@ -94,6 +118,13 @@ public class FortuneContainer implements Serializable {
     }
 
     public String frequencyTest(int totalGetTimes) {
+        /*
+         * Simulate calling get() function {totalGetTimes} times.
+         * Return a String contains:
+         * 1. frequency of each fortune occurs;
+         * 2. all visible fortunes in fortune container object;
+         * 3. all fortunes in fortune container object.
+         * */
         if (rightmostIndex >= 0) {
             HashMap<String, Integer> hashMap = new HashMap<>();
             for (int i = 0; i < totalGetTimes; i++) {

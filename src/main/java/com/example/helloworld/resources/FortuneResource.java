@@ -24,6 +24,11 @@ public class FortuneResource {
 
     @GET
     public String getFortune() {
+        /*
+         * HTTP GET
+         * invoke by:
+         * curl -XGET localhost:8080/fortune
+         * */
         fortuneContainer = ObjectIO.getFortuneContainer();
         String output = fortuneContainer.get();
         LOGGER.info("get fortune: " + output);

@@ -10,15 +10,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 
-@Path("/fortune") // This is where the HTTP URL path is set
+@Path("/fortune")
 @Produces(MediaType.APPLICATION_JSON)
 public class FortuneResource {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HelloWorldResource.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FortuneResource.class);
 
     private FortuneContainer fortuneContainer;
 
     public FortuneResource() {
-        
+
     }
 
 

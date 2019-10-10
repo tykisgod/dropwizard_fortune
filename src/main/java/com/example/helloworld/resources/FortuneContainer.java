@@ -22,15 +22,16 @@ public class FortuneContainer implements Serializable {
          * By saying 'visible part', meaning the part of fortune that hasn't been deleted and thus
          * can be returned by GET request.
          *
-         * The 'invisible part' are the part of fortune has been deleted and cannot returned by GET request,
-         * but they may still exists in fortuneList, they are just invisible by users.
+         * The 'invisible part' are the rightmost part of fortune that has been move to the position of deleted fortune
+         * and cannot returned by GET request, but they may still exists in fortuneList until rewrite by newly added fortune
+         * They are just invisible by users.
          */
         return fortuneList.size() - rightmostIndex <= 1;
     }
 
-    private void swapWithLastValue(int id) {
+    private void rewriteWithLastValue(int id) {
         /*
-         * Swap the fortune with id {id} with the rightmost value of fortuneList.
+         * Rewrite the fortune with id {id} with the rightmost value of fortuneList.
          * */
         String tempFortune = fortuneList.get(rightmostIndex);
         fortuneList.set(id, tempFortune);
@@ -74,7 +75,7 @@ public class FortuneContainer implements Serializable {
             return false;
         }
         if (id != rightmostIndex) {
-            swapWithLastValue(id);
+            rewriteWithLastValue(id);
         }
         rightmostIndex--;
         return true;

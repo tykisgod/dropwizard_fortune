@@ -1,6 +1,8 @@
 package com.example.helloworld;
 
-import com.example.helloworld.resources.HelloWorldResource;
+import com.example.helloworld.resources.FortuneResource;
+import com.example.helloworld.resources.FortunesResource;
+import com.example.helloworld.resources.FortunesTestResource;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
@@ -26,6 +28,8 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
     @Override
     public void run(HelloWorldConfiguration configuration, Environment environment) {
-        environment.jersey().register(new HelloWorldResource(ObjectIO.initFortuneContainer()));
+        environment.jersey().register(new FortuneResource());
+        environment.jersey().register(new FortunesResource());
+        environment.jersey().register(new FortunesTestResource());
     }
 }

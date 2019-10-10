@@ -6,7 +6,7 @@ import java.io.*;
 
 public class ObjectIO {
 
-    private static String fortuneContainerLocation = "fortuneContainer.fort";
+    private static final String fortuneContainerLocation = "fortuneContainer.fort";
 
     public static void WriteObjectToFile(Object serObj) {
         try {
@@ -14,15 +14,15 @@ public class ObjectIO {
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(serObj);
             objectOut.close();
-            System.out.println("The Object was succesfully written to a file");
+            System.out.println("The Object was successfully written to a file");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static FortuneContainer initFortuneContainer() {
-        FortuneContainer fortuneContainer = new FortuneContainer(-1);
+    public static FortuneContainer getFortuneContainer() {
+        FortuneContainer fortuneContainer = new FortuneContainer();
         try {
             System.out.println("Try Reading FortuneContainer!");
             FileInputStream fis = new FileInputStream(fortuneContainerLocation);
@@ -30,9 +30,10 @@ public class ObjectIO {
             fortuneContainer = (FortuneContainer) ois.readObject();
             System.out.println("Value of fortuneContainer is: " + fortuneContainer.toString());
             ois.close();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | InvalidClassException e) {
             System.out.println("Init FortuneContainer!");
-            fortuneContainer = new FortuneContainer(100);
+            fortuneContainer = new FortuneContainer();
+            System.out.println("Value of fortuneContainer is: " + fortuneContainer.toString());
             WriteObjectToFile(fortuneContainer);
         } catch (Exception e) {
             e.printStackTrace();

@@ -12,7 +12,6 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         new HelloWorldApplication().run(args);
     }
 
-
     @Override
     public String getName() {
         return "hello-world";
@@ -21,18 +20,12 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     @Override
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
         // Enable variable substitution with environment variables
-        bootstrap.setConfigurationSourceProvider(
-                new SubstitutingSourceProvider(
-                        bootstrap.getConfigurationSourceProvider(),
-                        new EnvironmentVariableSubstitutor(false)
-                )
-        );
+        bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(), new EnvironmentVariableSubstitutor(false)));
 
     }
 
     @Override
     public void run(HelloWorldConfiguration configuration, Environment environment) {
-
-        environment.jersey().register(new HelloWorldResource());
+        environment.jersey().register(new HelloWorldResource(ObjectIO.initFortuneContainer()));
     }
 }
